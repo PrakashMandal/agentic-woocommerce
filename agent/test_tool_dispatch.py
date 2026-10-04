@@ -25,12 +25,14 @@ def main() -> None:
     for name, tool_input in CALLS:
         result = dispatch_tool_call(client, name, tool_input)
         print(f"\n=== {name}({tool_input}) ===")
-        print(json.dumps(result, indent=2)[:1000])  # trimmed for readability
-        print(f"-> {len(result)} item(s)")
+        if result is None:
+            print("-> No result returned.")
+        else :
+            print(json.dumps(result, indent=2)[:1000])  # trimmed for readability
+            print(f"-> {len(result)} item(s)")
 
     # get_order needs a real ID, so pull one from the orders we just fetched.
-    orders = dispatch_tool_call(client, "get_orders", {"per_page": 1})
-    if orders:
+    if orders := dispatch_tool_call(client, "get_orders", {"per_page": 1}):
         order_id = orders[0]["id"]
         single = dispatch_tool_call(client, "get_order", {"order_id": order_id})
         print(f"\n=== get_order({{'order_id': {order_id}}}) ===")
