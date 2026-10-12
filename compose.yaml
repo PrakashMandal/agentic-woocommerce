@@ -1,4 +1,4 @@
-name: wp-mcp
+name: agentic-woocommerce
 services:
 
   db:

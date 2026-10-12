@@ -28,7 +28,7 @@ def main() -> None:
         if result is None:
             print("-> No result returned.")
         else :
-            print(json.dumps(result, indent=2)[:1000])  # trimmed for readability
+            # print(json.dumps(result, indent=2)[:1000])  # trimmed for readability
             print(f"-> {len(result)} item(s)")
 
     # get_order needs a real ID, so pull one from the orders we just fetched.
